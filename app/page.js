@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import faqs from "@/data/faqs";
+import { getDailyPrompt } from "@/actions/public";
 
 const features = [
   {
@@ -40,7 +41,8 @@ const features = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const advice = await getDailyPrompt();
   return (
     <div className="relative container mx-auto px-4 pt-16 pb-16">
       {/* Hero Section */}
@@ -70,7 +72,7 @@ export default function Home() {
             </div>
             <div className="space-y-4 p-4">
               <h3 className="text-xl font-semibold text-orange-900">
-                daily prompts
+                {advice ? advice : "My thoughts for today"}
               </h3>
               <Skeleton className="h-4 bg-orange-100 rounded w-3/4" />
               <Skeleton className="h-4 bg-orange-100 rounded w-full" />
@@ -202,6 +204,25 @@ export default function Home() {
             </AccordionItem>
           ))}
         </Accordion>
+      </div>
+
+      <div className="mt-24">
+        <Card className="bg-gradient-to-r from-orange-100 to-amber-50 shadow-lg">
+          <CardContent className="p-12 text-center">
+            <h2 className="text-3xl font-bold text-orange-900 mb-6">
+              Start Scribing Your Journey Today
+            </h2>
+            <p className="text-orange-700 mb-8 max-w-2xl mx-auto">
+              Join a few writers who have already discovered the power of
+              digital journaling
+            </p>
+            <Link href="/dashboard">
+              <Button size="lg" variant="journal" className="animate-bounce">
+                Get Started for free
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
