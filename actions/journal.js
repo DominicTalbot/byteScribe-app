@@ -1,10 +1,11 @@
 "use server";
 
-import { MOODS } from "@/app/lib/moods";
+import { getMoodById, MOODS } from "@/app/lib/moods";
 import { db } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/dist/types/server";
+import { auth } from "@clerk/nextjs/server";
 import { getPixabayImage } from "./public";
 import { revalidatePath } from "next/cache";
+import { request } from "@arcjet/next";
 
 export async function createJournalEntry(data) {
   try {
@@ -13,29 +14,6 @@ export async function createJournalEntry(data) {
 
     // Get request data for ArcJet
     const req = await request();
-
-    // Check rate limit
-    const decision = await aj.protect(req, {
-      userId,
-      requested: 1, // Specify how many tokens to consume
-    });
-
-    if (decision.isDenied()) {
-      if (decision.reason.isRateLimit()) {
-        const { remaining, reset } = decision.reason;
-        console.error({
-          code: "RATE_LIMIT_EXCEEDED",
-          details: {
-            remaining,
-            resetInSeconds: reset,
-          },
-        });
-
-        throw new Error("Too many requests. Please try again later.");
-      }
-
-      throw new Error("Request blocked");
-    }
 
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
@@ -52,7 +30,14 @@ export async function createJournalEntry(data) {
     // Get mood image from Pixabay
     const moodImageUrl = await getPixabayImage(data.moodQuery);
 
-    // Create the entry
+    const collectionExists = data.collectionId
+      ? await db.collection.findUnique({ where: { id: data.collectionId } })
+      : null;
+
+    if (data.collectionId && !collectionExists) {
+      throw new Error("Collection does not exist");
+    }
+
     const entry = await db.entry.create({
       data: {
         title: data.title,
@@ -60,8 +45,10 @@ export async function createJournalEntry(data) {
         mood: mood.id,
         moodScore: mood.score,
         moodImageUrl,
-        userId: user.id,
-        collectionId: data.collectionId || null,
+        user: { connect: { id: user.id } }, // nested connect here
+        collection: data.collectionId
+          ? { connect: { id: data.collectionId } }
+          : undefined,
       },
     });
 

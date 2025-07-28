@@ -50,7 +50,7 @@ model Entry{
   moodScore     Int
   moodImageUrl  String?
   collection    Collection?   @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-  collectionId  String
+  collectionId  String?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 }
