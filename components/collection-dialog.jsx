@@ -40,11 +40,11 @@ const CollectionForm = ({ onSuccess, open, setOpen, loading }) => {
 
                 <form onSubmit={onSubmit} className='space-y-2'>
                     <div className='space-y-2'>
-                        <label className='text-sm font-medium'>Collection Name</label>
+                        <label className='text-sm font-medium'>Collection name</label>
                         <Input
                             disabled={loading}
                             {...register("name")}
-                            placeholder="Enter colelction name..."
+                            placeholder="Enter collection name..."
                             className={`${errors.title ? "border-red-500" : ""}`}
                         />
                         {errors.name && (
@@ -53,7 +53,7 @@ const CollectionForm = ({ onSuccess, open, setOpen, loading }) => {
                     </div>
 
                     <div className='space-y-2'>
-                        <label className='text-sm font-medium'>Collection desciption</label>
+                        <label className='text-sm font-medium'>Collection description</label>
                         <Textarea
                             disabled={loading}
                             {...register("description")}
@@ -76,7 +76,7 @@ const CollectionForm = ({ onSuccess, open, setOpen, loading }) => {
                             type="submit"
                             variant="journal"
                         >
-                            Create Colelction
+                            Create Collection
                         </Button>
                     </div>
                 </form>

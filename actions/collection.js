@@ -50,7 +50,7 @@ export async function createCollection(data) {
         userId: user.id,
       },
     });
-    revalidatePath("/dashboard");
+    revalidatePath("/dashboard"); // Only here, after a mutation
     return collection;
   } catch (error) {
     throw new Error(`Failed to create collection: ${error.message}`);
@@ -101,6 +101,5 @@ export async function getCollections() {
       createdAt: "desc",
     },
   });
-  revalidatePath("/dashboard");
   return collections;
 }
