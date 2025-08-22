@@ -6,17 +6,38 @@ import { request } from "@arcjet/next";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
+export async function getCollections() {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const collections = await db.collection.findMany({
+    where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return collections;
+}
+
 export async function createCollection(data) {
   try {
     const { userId } = await auth();
-    if (!userId) {
-      throw new Error("User not authenticated");
-    }
+    if (!userId) throw new Error("Unauthorized");
+
+    // Get request data for ArcJet
     const req = await request();
 
+    // Check rate limit
     const decision = await aj.protect(req, {
       userId,
-      requested: 1,
+      requested: 1, // Specify how many tokens to consume
     });
 
     if (decision.isDenied()) {
@@ -33,8 +54,9 @@ export async function createCollection(data) {
         throw new Error("Too many requests. Please try again later.");
       }
 
-      throw new Error("Request denied.");
+      throw new Error("Request blocked");
     }
+
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
     });
@@ -50,56 +72,42 @@ export async function createCollection(data) {
         userId: user.id,
       },
     });
-    revalidatePath("/dashboard"); // Only here, after a mutation
+
+    revalidatePath("/dashboard");
     return collection;
   } catch (error) {
-    throw new Error(`Failed to create collection: ${error.message}`);
+    throw new Error(error.message);
   }
 }
 
-export async function getCollections() {
-  const { userId } = await auth();
-  if (!userId) {
-    throw new Error("User not authenticated");
+export async function deleteCollection(id) {
+  try {
+    const { userId } = await auth();
+    if (!userId) throw new Error("Unauthorized");
+
+    const user = await db.user.findUnique({
+      where: { clerkUserId: userId },
+    });
+
+    if (!user) throw new Error("User not found");
+
+    // Check if collection exists and belongs to user
+    const collection = await db.collection.findFirst({
+      where: {
+        id,
+        userId: user.id,
+      },
+    });
+
+    if (!collection) throw new Error("Collection not found");
+
+    // Delete the collection (entries will be cascade deleted)
+    await db.collection.delete({
+      where: { id },
+    });
+
+    return true;
+  } catch (error) {
+    throw new Error(error.message);
   }
-  const req = await request();
-
-  const decision = await aj.protect(req, {
-    userId,
-    requested: 1,
-  });
-
-  if (decision.isDenied()) {
-    if (decision.reason.isRateLimit()) {
-      const { remaining, reset } = decision.reason;
-      console.error({
-        code: "RATE_LIMIT_EXCEEDED",
-        details: {
-          remaining,
-          resetInSeconds: reset,
-        },
-      });
-
-      throw new Error("Too many requests. Please try again later.");
-    }
-
-    throw new Error("Request denied.");
-  }
-  const user = await db.user.findUnique({
-    where: { clerkUserId: userId },
-  });
-
-  if (!user) {
-    throw new Error("User not found");
-  }
-
-  const collections = await db.collection.findMany({
-    where: {
-      userId: user.id,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  return collections;
 }
