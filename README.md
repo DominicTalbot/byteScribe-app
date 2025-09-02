@@ -53,7 +53,7 @@ ByteScribe is now a complete journaling system:
     ![ArcJet Code in Journal](public/Images/ArcJet%20code%20in%20journal.png)
 
   - **ArcJet Configuration File:**  
-    ![ArcJet File](public\Images\ArcJet%20file%20.png)
+    ![ArcJet File](public/Images/ArcJet%20file%20.png)
 
   - **ArcJet Limit Tests & Requests:**  
     ![ArcJet Limit Test](public/Images/ArcJet%20Limit%20Test.png)  
