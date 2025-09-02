@@ -1,6 +1,6 @@
 # ByteScribe: Modern Journaling Web App
 
-[![Front Page Screenshot](public\Images\Frontpage.png)](https://bytescribe.vercel.app/)
+[![Front Page Screenshot](public/Images/Frontpage.png)](https://bytescribe.vercel.app/)
 
 > **Visit the live app:** [https://bytescribe.vercel.app/](https://bytescribe.vercel.app/)  
 > **See the code:** [GitHub Repository](https://github.com/DominicTalbot/byteScribe-app)
@@ -53,7 +53,7 @@ ByteScribe is now a complete journaling system:
     ![ArcJet Code in Journal](public/Images/ArcJet%20code%20in%20journal.png)
 
   - **ArcJet Configuration File:**  
-    ![ArcJet File](public/Images/ArcJet%20file.png)
+    ![ArcJet File](public\Images\ArcJet%20file%20.png)
 
   - **ArcJet Limit Tests & Requests:**  
     ![ArcJet Limit Test](public/Images/ArcJet%20Limit%20Test.png)  
@@ -82,7 +82,7 @@ ByteScribe is now a complete journaling system:
 
 - **Adding Journal Entry to Collection:**  
   Entries can be assigned to custom collections for organization.  
-  ![Adding Journal Entry to Collection](public/Images/Adding%20journal%20entry%20to%20collection.png)
+  ![Adding Journal Entry to Collection](public/Images/Adding%20journal%20entry%20to%20collection%20.png)
 
 - **Calendar Entry:**  
   Select and filter entries by date using a custom calendar.  
@@ -105,7 +105,7 @@ ByteScribe is now a complete journaling system:
 
 - **Mood Analytics:**  
   The dashboard visualizes your mood trends over time using charts.  
-  ![Toolbar](public/Images/Toolbar.png) <!-- Replace with a proper mood analytics screenshot if available -->
+  ![Mood Trends](public/Images/Mood%20analytics.png)
 
 ---
 
