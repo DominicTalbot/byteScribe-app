@@ -1,7 +1,5 @@
-import { auth } from "@clerk/nextjs/server";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useForm } from "react-hook-form";
 
 const useFetch = (cb) => {
   const [data, setData] = useState(undefined);
@@ -11,9 +9,11 @@ const useFetch = (cb) => {
   const fn = async (...args) => {
     setLoading(true);
     setError(null);
+
     try {
-      const result = await cb(...args);
-      setData(result);
+      const response = await cb(...args);
+      setData(response);
+      setError(null);
     } catch (error) {
       setError(error);
       toast.error(error.message);
