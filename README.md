@@ -1,6 +1,6 @@
 # ByteScribe: Modern Journaling Web App
 
-[![Front Page Screenshot](/Images/Frontpage.png)](https://bytescribe.vercel.app/)
+[![Front Page Screenshot](public\Images\Frontpage.png)](https://bytescribe.vercel.app/)
 
 > **Visit the live app:** [https://bytescribe.vercel.app/](https://bytescribe.vercel.app/)  
 > **See the code:** [GitHub Repository](https://github.com/DominicTalbot/byteScribe-app)
