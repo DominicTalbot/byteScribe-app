@@ -16,13 +16,13 @@ ByteScribe began as a simple idea: create a private, secure journal app for ever
 **Early Development Screenshots:**
 
 - **Logo Concepts & Backgrounds:**  
-  ![Logo and Background Code](/Images/Logo%20and%20background%20code.png)  
-  ![Logo and Background](/Images/Logo%20and%20background.png)  
-  ![Logo](/Images/Logo.png)
+  ![Logo and Background Code](/Images/Logo 20and%20background%20code.png)  
+  ![Logo and Background](/Images/Logo and%20background.png)  
+  ![Logo](public/Images/Logo.png)
 
 - **Login Page:**  
   _Early login UI using Clerk authentication._  
-  ![Log In](/Images/Log%20in.png)
+  ![Log In](public/Images/Log%20in.png)
 
 ---
 
@@ -44,21 +44,21 @@ ByteScribe is now a complete journaling system:
 
 - **Clerk Integration:**  
   Users sign up and log in securely. Protected routes (journal, dashboard, collections) require authentication.  
-  ![Log In](/Images/Log%20in.png)
+  ![Log In](public/Images/Log%20in.png)
 
 - **ArcJet Rate Limiting & Bot Protection:**  
   The app uses ArcJet to prevent abuse and bot traffic. Custom middleware protects sensitive endpoints and enforces user-based rate limits.
 
   - **ArcJet Code in Journal:**  
-    ![ArcJet Code in Journal](/Images/ArcJet%20code%20in%20journal.png)
+    ![ArcJet Code in Journal](public/Images/ArcJet%20code%20in%20journal.png)
 
   - **ArcJet Configuration File:**  
-    ![ArcJet File](/Images/ArcJet%20file.png)
+    ![ArcJet File](public/Images/ArcJet%20file.png)
 
   - **ArcJet Limit Tests & Requests:**  
-    ![ArcJet Limit Test](/Images/ArcJet%20Limit%20Test.png)  
-    ![ArcJet Limit Test 2](/Images/ArcJet%20Limit%20Test%202.png)  
-    ![ArcJet Request](/Images/ArcJet%20request.png)
+    ![ArcJet Limit Test](public/Images/ArcJet%20Limit%20Test.png)  
+    ![ArcJet Limit Test 2](public/Images/ArcJet%20Limit%20Test%202.png)  
+    ![ArcJet Request](public/Images/ArcJet%20request.png)
 
 ### 2. Database Architecture
 
@@ -66,37 +66,37 @@ ByteScribe is now a complete journaling system:
   All data (users, entries, collections, moods) is stored in a relational database. Schema is managed by Prisma ORM.
 
   - **Database Overview:**  
-    ![Database](/Images/Database.png)
+    ![Database](public/Images/Database.png)
 
   - **Prisma Table Generation & SQL:**  
-    ![Prisma After Generating](/Images/Prisma-afterGenerating.png)  
-    ![Prisma Code For Tables](/Images/Prisma-codeForTables.png)  
-    ![Prisma Created Tables](/Images/Prisma-createdTables.png)  
-    ![Prisma SQL Code](/Images/Prisma-sqlCode.png)
+    ![Prisma After Generating](public/Images/Prisma-afterGenerating.png)  
+    ![Prisma Code For Tables](public/Images/Prisma-codeForTables.png)  
+    ![Prisma Created Tables](public/Images/Prisma-createdTables.png)  
+    ![Prisma SQL Code](public/Images/Prisma-sqlCode.png)
 
 ### 3. Journaling: Entry Creation & Management
 
 - **Rich Text Editor:**  
   Users write journal entries with markdown support, embedded links, and formatting.  
-  ![Toolbar](/Images/Toolbar.png)
+  ![Toolbar](public/Images/Toolbar.png)
 
 - **Adding Journal Entry to Collection:**  
   Entries can be assigned to custom collections for organization.  
-  ![Adding Journal Entry to Collection](/Images/Adding%20journal%20entry%20to%20collection.png)
+  ![Adding Journal Entry to Collection](public/Images/Adding%20journal%20entry%20to%20collection.png)
 
 - **Calendar Entry:**  
   Select and filter entries by date using a custom calendar.  
-  ![Calendar Entry](/Images/Calendar%20entry.png)
+  ![Calendar Entry](public/Images/Calendar%20entry.png)
 
 ### 4. Collections Feature
 
 - **Collections Page:**  
   View all collections and their associated entries.  
-  ![Collections Page](/Images/Collections%20page.png)
+  ![Collections Page](public/Images/Collections%20page.png)
 
 - **Creating New Collection:**  
   Dialog for creating collections, with validation and feedback.  
-  ![Creating New Collection](/Images/Creating%20new%20collection.png)
+  ![Creating New Collection](public/Images/Creating%20new%20collection.png)
 
 ### 5. Mood Tracking & Analytics
 
@@ -105,7 +105,7 @@ ByteScribe is now a complete journaling system:
 
 - **Mood Analytics:**  
   The dashboard visualizes your mood trends over time using charts.  
-  ![Toolbar](/Images/Toolbar.png) <!-- Replace with a proper mood analytics screenshot if available -->
+  ![Toolbar](public/Images/Toolbar.png) <!-- Replace with a proper mood analytics screenshot if available -->
 
 ---
 
